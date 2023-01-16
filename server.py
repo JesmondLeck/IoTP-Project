@@ -245,15 +245,17 @@ def controlPwm(btn_increase, btn_decrease, btn_activate, btn_deactivate):
 	
 	elif 'btn-deactivate' == ctx.triggered_id:
 		speed_display = 0
-		speed=50
+		speed=0
 		p.start(speed)
 		return html.Div("")
 
 	elif 'btn-increase' == ctx.triggered_id:
-		if (speed < 100 or speed_display<100):
+		if (speed == 0):
+			speed = 50
+		elif (speed < 95):
 			speed+=5
-			speed_display+=10
-			p.ChangeDutyCycle(speed)
+		speed_display+=10
+		p.ChangeDutyCycle(speed)
 		return html.Div("")
 
 	elif 'btn-decrease' == ctx.triggered_id:
